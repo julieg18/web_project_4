@@ -1,0 +1,11 @@
+@import url(./__line/header__line.css);
+
+.header {
+  margin-top: 28px;
+}
+
+@media (min-width: 1280px) {
+  .header {
+    margin-top: 45px;
+  }
+}
