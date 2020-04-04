@@ -1,0 +1,18 @@
+.profile__button_type_edit {
+  width: 18px;
+  height: 18px;
+  margin-left: 12px;
+}
+
+@media (min-width: 768px) {
+  .profile__button_type_edit {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .profile__button_type_edit {
+    margin-top: 10px;
+  }
+}
