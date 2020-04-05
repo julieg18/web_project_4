@@ -4,7 +4,7 @@
   margin: 40px 20px 0 20px;
 }
 
-@media (min-width: 1240px) {
+@media (min-width: 1280px) {
   .elements {
     margin: 40px 0 0 0;
   }
