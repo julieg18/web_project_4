@@ -1,0 +1,15 @@
+.overlay__modal {
+  padding: 30px;
+  background-color: #fff;
+  color: #000;
+  position: relative;
+  border-radius: 10px;
+  width: 60%;
+}
+
+@media (min-width: 768px) {
+  .overlay__modal {
+    padding: 36px;
+    width: 400px;
+  }
+}
