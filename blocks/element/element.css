@@ -1,0 +1,17 @@
+@import url(./__image/element__image.css);
+@import url(./__info/element__info.css);
+@import url(./__title/element__title.css);
+@import url(./__like-button/element__like-button.css);
+
+.element {
+  background-color: #fff;
+  border-radius: 15px;
+  color: #000;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  .element {
+    margin: 0;
+  }
+}
