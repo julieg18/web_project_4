@@ -1,4 +1,4 @@
-.overlay__modal {
+.popup__container {
   padding: 30px;
   background-color: #fff;
   color: #000;
@@ -8,7 +8,7 @@
 }
 
 @media (min-width: 768px) {
-  .overlay__modal {
+  .popup__container {
     padding: 36px;
     width: 400px;
   }

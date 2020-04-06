@@ -1,4 +1,4 @@
-.overlay__exit-button {
+.popup__exit-button {
   background-color: transparent;
   background-image: url(../../../images/close.svg);
   background-size: contain;
@@ -12,7 +12,7 @@
 }
 
 @media (min-width: 768px) {
-  .overlay__exit-button {
+  .popup__exit-button {
     right: -34px;
     top: -34px;
     height: 32px;
