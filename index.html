@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Around The U.S.</title>
+    <link rel="stylesheet" href="/pages/index.css" />
+  </head>
+  <body class="page">
+    <header class="header">
+      <div class="logo"></div>
+      <div class="header__line"></div>
+    </header>
+    <main>
+      <section class="profile">
+        <img
+          src="/images/avatar-image.jpg"
+          alt="Jacques Cousteau"
+          class="profile__avatar"
+        />
+        <div class="profile__info">
+          <div class="profile__info-wrapper">
+            <p class="profile__name">
+              Jacques Cousteau
+            </p>
+            <button class="button profile__button profile__button_type_edit">
+              <img
+                src="/images/edit-icon.svg"
+                alt="a writing tool"
+                class="profile__edit-icon"
+              />
+            </button>
+          </div>
+          <p class="profile__job">Explorer</p>
+        </div>
+        <button class="button profile__button profile__button_type_add">
+          <img src="/images/plus.svg" alt="plus" class="profile__add-icon" />
+        </button>
+      </section>
+
+      <section class="elements">
+        <ul class="elements__list">
+          <li class="element">
+            <img
+              src="/images/yosemite-valley.jpg"
+              alt="Yosemite Valley"
+              class="element__image"
+            />
+            <div class="element__info">
+              <p class="element__title">Yosemite Valley</p>
+              <button class="element__like-button"></button>
+            </div>
+          </li>
+          <li class="element">
+            <img
+              src="/images/lake-louise.jpg"
+              alt="Lake Louise"
+              class="element__image"
+            />
+            <div class="element__info">
+              <p class="element__title">Lake Louise</p>
+              <button class="element__like-button"></button>
+            </div>
+          </li>
+          <li class="element">
+            <img
+              src="/images/bald-mountains.png"
+              alt="Bald Mountains"
+              class="element__image"
+            />
+            <div class="element__info">
+              <p class="element__title">Bald Mountains</p>
+              <button class="element__like-button"></button>
+            </div>
+          </li>
+          <li class="element">
+            <img
+              src="/images/latemar.jpg"
+              alt="Latemar"
+              class="element__image"
+            />
+            <div class="element__info">
+              <p class="element__title">Latemar</p>
+              <button class="element__like-button"></button>
+            </div>
+          </li>
+          <li class="element">
+            <img
+              src="/images/vanois-national.jpg"
+              alt="Vanois National Park"
+              class="element__image"
+            />
+            <div class="element__info">
+              <p class="element__title">Vanois National...</p>
+              <button class="element__like-button"></button>
+            </div>
+          </li>
+          <li class="element">
+            <img
+              src="/images/lago-di-braies.jpg"
+              alt="Lago di Braies"
+              class="element__image"
+            />
+            <div class="element__info">
+              <p class="element__title">Lago di Braies</p>
+              <button class="element__like-button"></button>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <div class="popup">
+        <div class="popup__container">
+          <button class="button popup__exit-button"></button>
+          <form class="edit-form">
+            <h1 class="edit-form__heading">Edit profile</h1>
+            <input
+              value="Jacques Cousteau"
+              type="text"
+              class="edit-form__field"
+            />
+            <input value="Explorer" type="text" class="edit-form__field" />
+            <button type="submit" class="edit-form__submit-button">Save</button>
+          </form>
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+      <p class="footer__copyright">© 2020 Around The U.S.</p>
+    </footer>
+
+    <script src="index.js"></script>
+  </body>
+</html>

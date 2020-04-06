@@ -1,0 +1,6 @@
+@media (min-width: 768px) {
+  .profile__info {
+    margin-right: auto;
+    text-align: left;
+  }
+}

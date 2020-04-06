@@ -1,0 +1,8 @@
+@import url(./__heading/edit-form__heading.css);
+@import url(./__field/edit-form__field.css);
+@import url(./__submit-button/edit-form__submit-button.css);
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+}
