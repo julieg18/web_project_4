@@ -1,20 +1,20 @@
-let profileEditButton = document.querySelector('.profile__button_type_edit');
-let popupExitButton = document.querySelector('.popup__exit-button');
-let editForm = document.querySelector('.edit-form');
+const profileEditButton = document.querySelector('.profile__button_type_edit');
+const popupExitButton = document.querySelector('.popup__exit-button');
+const editForm = document.querySelector('.edit-form');
 
 function togglePopupBox() {
-  let popup = document.querySelector('.popup');
+  const popup = document.querySelector('.popup');
   popup.classList.toggle('popup_opened');
 }
 
 function formSubmitHandler(evt) {
   evt.preventDefault();
 
-  let editFormInputs = editForm.querySelectorAll('.edit-form__field');
-  let nameInputValue = editFormInputs[0].value;
-  let jobInputValue = editFormInputs[1].value;
-  let profileName = document.querySelector('.profile__name');
-  let profileJob = document.querySelector('.profile__job');
+  const editFormInputs = editForm.querySelectorAll('.edit-form__field');
+  const nameInputValue = editFormInputs[0].value;
+  const jobInputValue = editFormInputs[1].value;
+  const profileName = document.querySelector('.profile__name');
+  const profileJob = document.querySelector('.profile__job');
 
   profileName.textContent = nameInputValue;
   profileJob.textContent = jobInputValue;
