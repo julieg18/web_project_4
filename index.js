@@ -1,23 +1,23 @@
 const profileEditButton = document.querySelector('.profile__button_type_edit');
-const popupExitButton = document.querySelector('.popup__exit-button');
-const editForm = document.querySelector('.edit-form');
+const popup = document.querySelector('.popup');
+const popupExitButton = popup.querySelector('.popup__exit-button');
+const editForm = popup.querySelector('.edit-form');
+const profileName = document.querySelector('.profile__name');
+const profileJob = document.querySelector('.profile__job');
+const nameInput = editForm.querySelector('.edit-form__field_type_name');
+const jobInput = editForm.querySelector('.edit-form__field_type_job');
 
 function togglePopupBox() {
-  const popup = document.querySelector('.popup');
   popup.classList.toggle('popup_opened');
 }
 
 function formSubmitHandler(evt) {
   evt.preventDefault();
 
-  const editFormInputs = editForm.querySelectorAll('.edit-form__field');
-  const nameInputValue = editFormInputs[0].value;
-  const jobInputValue = editFormInputs[1].value;
-  const profileName = document.querySelector('.profile__name');
-  const profileJob = document.querySelector('.profile__job');
+  profileName.textContent = nameInput.value;
+  profileJob.textContent = jobInput.value;
 
-  profileName.textContent = nameInputValue;
-  profileJob.textContent = jobInputValue;
+  editForm.reset();
   togglePopupBox();
 }
 
