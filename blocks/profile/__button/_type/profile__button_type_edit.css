@@ -14,5 +14,6 @@
 @media (min-width: 1280px) {
   .profile__button_type_edit {
     margin-top: 10px;
+    margin-left: 24px;
   }
 }
