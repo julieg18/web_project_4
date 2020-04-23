@@ -4,11 +4,13 @@ const elementsList = document.querySelector('.elements__list');
 const popup = document.querySelector('.popup');
 const popupExitButton = popup.querySelector('.popup__exit-button');
 const editForm = popup.querySelector('.form_type_edit-profile');
+const jobInput = editForm.querySelector('.form__field_type_job');
+const nameInput = editForm.querySelector('.form__field_type_name');
 const addCardForm = popup.querySelector('.form__type_add-card');
+const titleInput = addCardForm.querySelector('.form__field_type_title');
+const imgLinkInput = addCardForm.querySelector('.form__field_type_img-link');
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
-const nameInput = editForm.querySelector('.form__field_type_name');
-const jobInput = editForm.querySelector('.form__field_type_job');
 const elementTemplate = document.querySelector('#element-template').content;
 const initialCards = [
   {
@@ -79,8 +81,18 @@ function editFormSubmitHandler(evt) {
   togglePopupBox();
 }
 
+function addCardFormSubmitHandler(evt) {
+  evt.preventDefault();
+
+  addCard({ name: titleInput.value, link: imgLinkInput.value });
+
+  addCardForm.reset();
+  togglePopupBox();
+}
+
 loadInitialCards(initialCards);
 profileEditButton.addEventListener('click', showEditForm);
 profileAddButton.addEventListener('click', showAddForm);
 popupExitButton.addEventListener('click', togglePopupBox);
 editForm.addEventListener('submit', editFormSubmitHandler);
+addCardForm.addEventListener('submit', addCardFormSubmitHandler);
