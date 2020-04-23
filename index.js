@@ -39,12 +39,20 @@ const initialCards = [
   },
 ];
 
+function toggleLikeButton(evt) {
+  evt.target.classList.toggle('element__like-button_active');
+}
+
 function addCard(card) {
   const cardElement = elementTemplate.cloneNode(true);
 
   cardElement.querySelector('.element__image').alt = card.name;
   cardElement.querySelector('.element__image').src = card.link;
   cardElement.querySelector('.element__title').textContent = card.name;
+
+  cardElement
+    .querySelector('.element__like-button')
+    .addEventListener('click', toggleLikeButton);
 
   elementsList.prepend(cardElement);
 }
