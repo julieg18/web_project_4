@@ -39,6 +39,11 @@ const initialCards = [
   },
 ];
 
+function deleteCard(evt) {
+  const card = evt.target.closest('.element');
+  card.remove();
+}
+
 function toggleLikeButton(evt) {
   evt.target.classList.toggle('element__like-button_active');
 }
@@ -53,6 +58,9 @@ function addCard(card) {
   cardElement
     .querySelector('.element__like-button')
     .addEventListener('click', toggleLikeButton);
+  cardElement
+    .querySelector('.element__delete-button')
+    .addEventListener('click', deleteCard);
 
   elementsList.prepend(cardElement);
 }
