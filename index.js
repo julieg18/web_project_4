@@ -1,13 +1,15 @@
 const profileEditButton = document.querySelector('.profile__button_type_edit');
+const profileAddButton = document.querySelector('.profile__button_type_add');
 const elementsList = document.querySelector('.elements__list');
-const elementTemplate = document.querySelector('#element-template').content;
 const popup = document.querySelector('.popup');
 const popupExitButton = popup.querySelector('.popup__exit-button');
-const editForm = popup.querySelector('.edit-form');
+const editForm = popup.querySelector('.form_type_edit-profile');
+const addCardForm = popup.querySelector('.form__type_add-card');
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
-const nameInput = editForm.querySelector('.edit-form__field_type_name');
-const jobInput = editForm.querySelector('.edit-form__field_type_job');
+const nameInput = editForm.querySelector('.form__field_type_name');
+const jobInput = editForm.querySelector('.form__field_type_job');
+const elementTemplate = document.querySelector('#element-template').content;
 const initialCards = [
   {
     name: 'Lake Louise',
@@ -55,7 +57,19 @@ function togglePopupBox() {
   popup.classList.toggle('popup_opened');
 }
 
-function formSubmitHandler(evt) {
+function showEditForm() {
+  addCardForm.classList.remove('form_show');
+  editForm.classList.add('form_show');
+  togglePopupBox();
+}
+
+function showAddForm() {
+  editForm.classList.remove('form_show');
+  addCardForm.classList.add('form_show');
+  togglePopupBox();
+}
+
+function editFormSubmitHandler(evt) {
   evt.preventDefault();
 
   profileName.textContent = nameInput.value;
@@ -66,6 +80,7 @@ function formSubmitHandler(evt) {
 }
 
 loadInitialCards(initialCards);
-profileEditButton.addEventListener('click', togglePopupBox);
+profileEditButton.addEventListener('click', showEditForm);
+profileAddButton.addEventListener('click', showAddForm);
 popupExitButton.addEventListener('click', togglePopupBox);
-editForm.addEventListener('submit', formSubmitHandler);
+editForm.addEventListener('submit', editFormSubmitHandler);

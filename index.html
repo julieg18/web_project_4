@@ -38,19 +38,43 @@
       <div class="popup">
         <div class="popup__container">
           <button class="button popup__exit-button"></button>
-          <form class="edit-form">
-            <h1 class="edit-form__heading">Edit profile</h1>
+          <form class="form form_type_edit-profile">
+            <h1 class="form__heading">Edit profile</h1>
             <input
               value="Jacques Cousteau"
               type="text"
-              class="edit-form__field edit-form__field_type_name"
+              class="form__field form__field_type_name"
             />
             <input
               value="Explorer"
               type="text"
-              class="edit-form__field edit-form__field_type_job"
+              class="form__field form__field_type_job"
             />
-            <button type="submit" class="edit-form__submit-button">Save</button>
+            <button
+              type="submit"
+              class="form__submit-button form__submit-button_type_edit-profile"
+            >
+              Save
+            </button>
+          </form>
+          <form class="form form_show form__type_add-card">
+            <h1 class="form__heading">New place</h1>
+            <input
+              placeholder="Title"
+              type="text"
+              class="form__field form__field_type_title"
+            />
+            <input
+              placeholder="Image-link"
+              type="text"
+              class="form__field form__field_type_img-link"
+            />
+            <button
+              type="submit"
+              class="form__submit-button form__submit-button_type_add-card"
+            >
+              Create
+            </button>
           </form>
         </div>
       </div>
