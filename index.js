@@ -86,12 +86,6 @@ function addCard(card) {
   elementsList.prepend(cardElement);
 }
 
-function loadInitialCards() {
-  initialCards.forEach((initialCard) => {
-    addCard(initialCard);
-  });
-}
-
 function showEditForm() {
   addCardForm.classList.remove('form_show');
   picture.classList.remove('picture_show');
@@ -125,7 +119,9 @@ function addCardFormSubmitHandler(evt) {
   togglePopupBox();
 }
 
-loadInitialCards(initialCards);
+initialCards.forEach((initialCard) => {
+  addCard(initialCard);
+});
 profileEditButton.addEventListener('click', showEditForm);
 profileAddButton.addEventListener('click', showAddForm);
 popupExitButton.addEventListener('click', togglePopupBox);
