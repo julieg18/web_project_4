@@ -1,5 +1,7 @@
 const profileEditButton = document.querySelector('.profile__button_type_edit');
 const profileAddButton = document.querySelector('.profile__button_type_add');
+const profileName = document.querySelector('.profile__name');
+const profileJob = document.querySelector('.profile__job');
 const elementsList = document.querySelector('.elements__list');
 const popup = document.querySelector('.popup');
 const popupExitButton = popup.querySelector('.popup__exit-button');
@@ -9,8 +11,9 @@ const nameInput = editForm.querySelector('.form__field_type_name');
 const addCardForm = popup.querySelector('.form__type_add-card');
 const titleInput = addCardForm.querySelector('.form__field_type_title');
 const imgLinkInput = addCardForm.querySelector('.form__field_type_img-link');
-const profileName = document.querySelector('.profile__name');
-const profileJob = document.querySelector('.profile__job');
+const picture = popup.querySelector('.picture');
+const pictureImage = picture.querySelector('.picture__image');
+const pictureTitle = picture.querySelector('.picture__title');
 const elementTemplate = document.querySelector('#element-template').content;
 const initialCards = [
   {
@@ -48,6 +51,21 @@ function toggleLikeButton(evt) {
   evt.target.classList.toggle('element__like-button_active');
 }
 
+function togglePopupBox() {
+  popup.classList.toggle('popup_opened');
+}
+
+function showPicture(evt) {
+  pictureImage.src = evt.target.src;
+  pictureImage.alt = evt.target.alt;
+  pictureTitle.textContent = evt.target.alt;
+
+  editForm.classList.remove('form_show');
+  picture.classList.add('picture_show');
+  addCardForm.classList.remove('form_show');
+  togglePopupBox();
+}
+
 function addCard(card) {
   const cardElement = elementTemplate.cloneNode(true);
 
@@ -61,6 +79,9 @@ function addCard(card) {
   cardElement
     .querySelector('.element__delete-button')
     .addEventListener('click', deleteCard);
+  cardElement
+    .querySelector('.element__image')
+    .addEventListener('click', showPicture);
 
   elementsList.prepend(cardElement);
 }
@@ -71,18 +92,16 @@ function loadInitialCards() {
   });
 }
 
-function togglePopupBox() {
-  popup.classList.toggle('popup_opened');
-}
-
 function showEditForm() {
   addCardForm.classList.remove('form_show');
+  picture.classList.remove('picture_show');
   editForm.classList.add('form_show');
   togglePopupBox();
 }
 
 function showAddForm() {
   editForm.classList.remove('form_show');
+  picture.classList.remove('picture_show');
   addCardForm.classList.add('form_show');
   togglePopupBox();
 }
