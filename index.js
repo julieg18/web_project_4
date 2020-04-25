@@ -86,17 +86,16 @@ function addCard(card) {
   elementsList.prepend(cardElement);
 }
 
-function showEditForm() {
-  addCardForm.classList.remove('form_show');
+function showForm(evt) {
+  if (evt.target.classList.contains('profile__button_type_edit')) {
+    editForm.classList.add('form_show');
+    addCardForm.classList.remove('form_show');
+  } else {
+    editForm.classList.remove('form_show');
+    addCardForm.classList.add('form_show');
+  }
   picture.classList.remove('picture_show');
-  editForm.classList.add('form_show');
-  togglePopupBox();
-}
 
-function showAddForm() {
-  editForm.classList.remove('form_show');
-  picture.classList.remove('picture_show');
-  addCardForm.classList.add('form_show');
   togglePopupBox();
 }
 
@@ -122,8 +121,8 @@ function addCardFormSubmitHandler(evt) {
 initialCards.forEach((initialCard) => {
   addCard(initialCard);
 });
-profileEditButton.addEventListener('click', showEditForm);
-profileAddButton.addEventListener('click', showAddForm);
+profileEditButton.addEventListener('click', showForm);
+profileAddButton.addEventListener('click', showForm);
 popupExitButton.addEventListener('click', togglePopupBox);
 editForm.addEventListener('submit', editFormSubmitHandler);
 addCardForm.addEventListener('submit', addCardFormSubmitHandler);
