@@ -22,7 +22,7 @@ const initialCards = [
   },
   {
     name: 'Bald Mountains',
-    link: './images/bald-mountains.png',
+    link: './images/bald-mountains.jpg',
   },
   {
     name: 'Latemar',
