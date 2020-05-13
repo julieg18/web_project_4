@@ -38,18 +38,33 @@
       <div class="popup">
         <div class="popup__container">
           <button class="button popup__exit-button"></button>
-          <form class="form form_type_edit-profile">
+          <form class="form form_type_edit-profile" novalidate>
             <h1 class="form__heading">Edit profile</h1>
-            <input
-              value="Jacques Cousteau"
-              type="text"
-              class="form__field form__field_type_name"
-            />
-            <input
-              value="Explorer"
-              type="text"
-              class="form__field form__field_type_job"
-            />
+            <label class="form__label" for="name-field">
+              <input
+                value="Jacques Cousteau"
+                type="text"
+                class="form__field form__field_type_name"
+                id="name-field"
+                minlength="4"
+                maxlength="40"
+                pattern="[a-zA-Z -]{1,}"
+                required
+              />
+              <span class="form__field-error" id="name-field-error"></span>
+            </label>
+            <label class="form__label" for="job-field">
+              <input
+                value="Explorer"
+                type="text"
+                class="form__field form__field_type_job"
+                id="job-field"
+                minlength="2"
+                maxlength="200"
+                required
+              />
+              <span class="form__field-error" id="job-field-error"></span>
+            </label>
             <button
               type="submit"
               class="form__submit-button form__submit-button_type_edit-profile"
@@ -98,6 +113,7 @@
         </div>
       </li>
     </template>
+    <script src="./scripts/validate.js"></script>
     <script src="./scripts/index.js"></script>
   </body>
 </html>
