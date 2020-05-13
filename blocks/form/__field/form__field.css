@@ -8,14 +8,6 @@
   width: 100%;
 }
 
-label:first-of-type .form__field {
-  margin: 40px 0 0 0;
-}
-
-label:nth-of-type(2) .form__field {
-  margin: 13px 0 0 0;
-}
-
 .form__field::placeholder {
   font-weight: normal;
   font-size: 12px;
@@ -47,10 +39,6 @@ label:nth-of-type(2) .form__field {
   .form__field {
     font-size: 14px;
     line-height: 17px;
-  }
-
-  .form__field:nth-of-type(1) {
-    margin: 50px 0 0 0;
   }
 
   .form__field::placeholder {
