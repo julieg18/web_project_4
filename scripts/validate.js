@@ -52,6 +52,7 @@ function enableValidation(settingsObj) {
   forms.forEach((form) => {
     const formInputs = form.querySelectorAll(inputSelector);
     const submitButton = form.querySelector(submitButtonSelector);
+    toggleSubmitButtonState(formInputs, submitButton, classes);
 
     formInputs.forEach((formInput) => {
       function handleFormInput() {

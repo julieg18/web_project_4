@@ -72,18 +72,30 @@
               Save
             </button>
           </form>
-          <form class="form form_show form__type_add-card">
+          <form class="form form_show form__type_add-card" novalidate>
             <h1 class="form__heading">New place</h1>
-            <input
-              placeholder="Title"
-              type="text"
-              class="form__field form__field_type_title"
-            />
-            <input
-              placeholder="Image-link"
-              type="text"
-              class="form__field form__field_type_img-link"
-            />
+            <label for="title-field" class="form__label">
+              <input
+                placeholder="Title"
+                type="text"
+                class="form__field form__field_type_title"
+                id="title-field"
+                minlength="1"
+                maxlength="30"
+                required
+              />
+              <span class="form__field-error" id="title-field-error"></span>
+            </label>
+            <label for="img-link-field" class="form__label">
+              <input
+                placeholder="Image-link"
+                type="url"
+                class="form__field form__field_type_img-link"
+                id="img-link-field"
+                required
+              />
+              <span class="form__field-error" id="img-link-field-error"></span>
+            </label>
             <button
               type="submit"
               class="form__submit-button form__submit-button_type_add-card"
