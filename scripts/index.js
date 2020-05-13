@@ -55,6 +55,18 @@ function togglePopupBox() {
   popup.classList.toggle('popup_opened');
 }
 
+function checkIfPopupOverlayWasClicked(e) {
+  if (e.target.classList.contains('popup')) {
+    togglePopupBox();
+  }
+}
+
+function checkIfEscKeyWasPressed(e) {
+  if (e.key === 'Escape' && popup.classList.contains('popup_opened')) {
+    togglePopupBox();
+  }
+}
+
 function showPicture(evt) {
   pictureImage.src = evt.target.src;
   pictureImage.alt = evt.target.alt;
@@ -124,5 +136,7 @@ initialCards.forEach((initialCard) => {
 profileEditButton.addEventListener('click', showForm);
 profileAddButton.addEventListener('click', showForm);
 popupExitButton.addEventListener('click', togglePopupBox);
+popup.addEventListener('click', checkIfPopupOverlayWasClicked);
+document.addEventListener('keyup', checkIfEscKeyWasPressed);
 editForm.addEventListener('submit', editFormSubmitHandler);
 addCardForm.addEventListener('submit', addCardFormSubmitHandler);
