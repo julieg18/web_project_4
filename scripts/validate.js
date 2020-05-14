@@ -1,8 +1,13 @@
-function showFormFieldError(formFieldElement, errorElement, classes) {
+function showFormFieldError(
+  formFieldElement,
+  errorElement,
+  errorMessage,
+  classes
+) {
   const { inputErrorClass, errorClass } = classes;
 
   formFieldElement.classList.add(inputErrorClass);
-  errorElement.textContent = formFieldElement.validationMessage;
+  errorElement.textContent = errorMessage;
   errorElement.classList.add(errorClass);
 }
 
@@ -16,14 +21,14 @@ function hideFormFieldError(formFieldElement, errorElement, classes) {
 
 function toggleSubmitButtonState(inputList, submitButton, classes) {
   const { inactiveButtonClass } = classes;
-  const areInputsValid = Array.from(inputList).every(
-    (input) => input.validity.valid
+  const areInputsInvalid = Array.from(inputList).some(
+    (input) => !input.validity.valid
   );
 
-  if (areInputsValid) {
-    submitButton.classList.remove(inactiveButtonClass);
-  } else {
+  if (areInputsInvalid) {
     submitButton.classList.add(inactiveButtonClass);
+  } else {
+    submitButton.classList.remove(inactiveButtonClass);
   }
 }
 
@@ -35,7 +40,12 @@ function checkFormFieldValidity(formElement, formFieldElement, classes) {
   if (formFieldElement.validity.valid) {
     hideFormFieldError(formFieldElement, errorElement, classes);
   } else {
-    showFormFieldError(formFieldElement, errorElement, classes);
+    showFormFieldError(
+      formFieldElement,
+      errorElement,
+      formFieldElement.validationMessage,
+      classes
+    );
   }
 }
 
@@ -47,7 +57,7 @@ function enableValidation(settingsObj) {
     ...classes
   } = settingsObj;
 
-  const forms = document.querySelectorAll(formSelector);
+  const forms = Array.from(document.querySelectorAll(formSelector));
 
   forms.forEach((form) => {
     const formInputs = form.querySelectorAll(inputSelector);
@@ -55,12 +65,10 @@ function enableValidation(settingsObj) {
     toggleSubmitButtonState(formInputs, submitButton, classes);
 
     formInputs.forEach((formInput) => {
-      function handleFormInput() {
+      formInput.addEventListener('input', function () {
         checkFormFieldValidity(form, formInput, classes);
         toggleSubmitButtonState(formInputs, submitButton, classes);
-      }
-
-      formInput.addEventListener('input', handleFormInput);
+      });
     });
   });
 }
