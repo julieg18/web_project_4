@@ -1,3 +1,6 @@
+import Card from './Card.js';
+import FormValidator from './FormValidator.js';
+
 const profileEditButton = document.querySelector('.profile__button_type_edit');
 const profileAddButton = document.querySelector('.profile__button_type_add');
 const profileName = document.querySelector('.profile__name');
@@ -12,44 +15,40 @@ const addCardForm = popup.querySelector('.form__type_add-card');
 const titleInput = addCardForm.querySelector('.form__field_type_title');
 const imgLinkInput = addCardForm.querySelector('.form__field_type_img-link');
 const picture = popup.querySelector('.picture');
-const pictureImage = picture.querySelector('.picture__image');
-const pictureTitle = picture.querySelector('.picture__title');
-const elementTemplate = document.querySelector('#element-template').content;
+const forms = Array.from(document.querySelectorAll('.form'));
 const initialCards = [
   {
-    name: 'Lake Louise',
-    link: './images/lake-louise.jpg',
+    text: 'Lake Louise',
+    imgLink: './images/lake-louise.jpg',
   },
   {
-    name: 'Bald Mountains',
-    link: './images/bald-mountains.jpg',
+    text: 'Bald Mountains',
+    imgLink: './images/bald-mountains.jpg',
   },
   {
-    name: 'Latemar',
-    link: './images/latemar.jpg',
+    text: 'Latemar',
+    imgLink: './images/latemar.jpg',
   },
   {
-    name: 'Vanois National...',
-    link: './images/vanois-national.jpg',
+    text: 'Vanois National...',
+    imgLink: './images/vanois-national.jpg',
   },
   {
-    name: 'Lago di Braies',
-    link: './images/lago-di-braies.jpg',
+    text: 'Lago di Braies',
+    imgLink: './images/lago-di-braies.jpg',
   },
   {
-    name: 'Yosemite Valley',
-    link: './images/yosemite-valley.jpg',
+    text: 'Yosemite Valley',
+    imgLink: './images/yosemite-valley.jpg',
   },
 ];
-
-function deleteCard(evt) {
-  const card = evt.target.closest('.element');
-  card.remove();
-}
-
-function toggleLikeButton(evt) {
-  evt.target.classList.toggle('element__like-button_active');
-}
+const settingsObject = {
+  inputSelector: '.form__field',
+  submitButtonSelector: '.form__submit-button',
+  inactiveButtonClass: 'form__submit-button_inactive',
+  inputErrorClass: 'form__field_type_error',
+  errorClass: 'form__field-error_active',
+};
 
 function closePopupIfEscWasPressed(e) {
   if (e.key === 'Escape') {
@@ -73,34 +72,9 @@ function checkIfPopupOverlayWasClicked(e) {
   }
 }
 
-function showPicture(evt) {
-  pictureImage.src = evt.target.src;
-  pictureImage.alt = evt.target.alt;
-  pictureTitle.textContent = evt.target.alt;
-
-  editForm.classList.remove('form_show');
-  picture.classList.add('picture_show');
-  addCardForm.classList.remove('form_show');
-  togglePopupBox();
-}
-
-function addCard(card) {
-  const cardElement = elementTemplate.cloneNode(true);
-
-  cardElement.querySelector('.element__image').alt = card.name;
-  cardElement.querySelector('.element__image').src = card.link;
-  cardElement.querySelector('.element__title').textContent = card.name;
-
-  cardElement
-    .querySelector('.element__like-button')
-    .addEventListener('click', toggleLikeButton);
-  cardElement
-    .querySelector('.element__delete-button')
-    .addEventListener('click', deleteCard);
-  cardElement
-    .querySelector('.element__image')
-    .addEventListener('click', showPicture);
-
+function addCard(cardData) {
+  const card = new Card(cardData, '#element-template');
+  const cardElement = card.generateCard();
   elementsList.prepend(cardElement);
 }
 
@@ -130,14 +104,16 @@ function editFormSubmitHandler(evt) {
 function addCardFormSubmitHandler(evt) {
   evt.preventDefault();
 
-  addCard({ name: titleInput.value, link: imgLinkInput.value });
+  addCard({ text: titleInput.value, imgLink: imgLinkInput.value });
 
   addCardForm.reset();
   togglePopupBox();
 }
 
-initialCards.forEach((initialCard) => {
-  addCard(initialCard);
+initialCards.forEach(addCard);
+forms.forEach((form) => {
+  const newFormValidator = new FormValidator(settingsObject, form);
+  newFormValidator.enableValidation();
 });
 profileEditButton.addEventListener('click', showForm);
 profileAddButton.addEventListener('click', showForm);
