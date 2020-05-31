@@ -1,5 +1,6 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
+import { togglePopupBox } from './utils.js';
 
 const profileEditButton = document.querySelector('.profile__button_type_edit');
 const profileAddButton = document.querySelector('.profile__button_type_add');
@@ -14,7 +15,6 @@ const nameInput = editForm.querySelector('.form__field_type_name');
 const addCardForm = popup.querySelector('.form__type_add-card');
 const titleInput = addCardForm.querySelector('.form__field_type_title');
 const imgLinkInput = addCardForm.querySelector('.form__field_type_img-link');
-const picture = popup.querySelector('.picture');
 const forms = Array.from(document.querySelectorAll('.form'));
 const initialCards = [
   {
@@ -50,22 +50,6 @@ const settingsObject = {
   errorClass: 'form__field-error_active',
 };
 
-function closePopupIfEscWasPressed(e) {
-  if (e.key === 'Escape') {
-    popup.classList.remove('popup_opened');
-  }
-}
-
-function togglePopupBox() {
-  popup.classList.toggle('popup_opened');
-
-  if (popup.classList.contains('popup_opened')) {
-    document.addEventListener('keyup', closePopupIfEscWasPressed);
-  } else {
-    document.removeEventListener('keyup', closePopupIfEscWasPressed);
-  }
-}
-
 function checkIfPopupOverlayWasClicked(e) {
   if (e.target.classList.contains('popup')) {
     togglePopupBox();
@@ -74,19 +58,15 @@ function checkIfPopupOverlayWasClicked(e) {
 
 function addCard(cardData) {
   const card = new Card(cardData, '#element-template');
-  const cardElement = card.generateCard();
-  elementsList.prepend(cardElement);
+  elementsList.prepend(card.generateCard());
 }
 
 function showForm(evt) {
   if (evt.target.classList.contains('profile__button_type_edit')) {
     editForm.classList.add('form_show');
-    addCardForm.classList.remove('form_show');
   } else {
-    editForm.classList.remove('form_show');
     addCardForm.classList.add('form_show');
   }
-  picture.classList.remove('picture_show');
 
   togglePopupBox();
 }
