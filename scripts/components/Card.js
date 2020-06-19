@@ -1,5 +1,4 @@
-/* eslint-disable no-underscore-dangle */
-import { togglePopupBox } from './utils.js';
+import { togglePopupBox } from '../utils/utils.js';
 
 const picture = document.querySelector('.picture');
 const pictureImage = picture.querySelector('.picture__image');
