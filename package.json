@@ -1,7 +1,7 @@
 {
   "name": "web_project_4",
   "version": "1.0.0",
-  "description": "### Overview",
+  "description": "\"Around The U.S.\" is an interactive page where users can add, remove, or like photos.",
   "main": "index.js",
   "scripts": {
     "build": "webpack",
@@ -12,7 +12,7 @@
     "url": "git+https://github.com/julieg18/web_project_4.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Julie Galvan",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/julieg18/web_project_4/issues"
