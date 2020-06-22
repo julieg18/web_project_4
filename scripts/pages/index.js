@@ -3,12 +3,10 @@ import FormValidator from '../components/FormValidator.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
+import Section from '../components/Section.js';
 
 const profileEditButton = document.querySelector('.profile__button_type_edit');
 const profileAddButton = document.querySelector('.profile__button_type_add');
-const elementsList = document.querySelector('.elements__list');
-const editForm = document.querySelector('.form_type_edit-profile');
-const addCardForm = document.querySelector('.form__type_add-card');
 const forms = Array.from(document.querySelectorAll('.form'));
 const imagePopup = new PopupWithImage('.popup_content_picture');
 const profileInfo = new UserInfo({
@@ -53,13 +51,25 @@ function handleCardClick(data) {
   imagePopup.open(data);
 }
 
-function addCard(cardData) {
+function createCard(cardData) {
   const card = new Card(
     { ...cardData, popup: imagePopup, handleCardClick },
     '#element-template',
   );
-  elementsList.prepend(card.generateCard());
+  return card.generateCard();
 }
+
+const cards = new Section(
+  {
+    items: initialCards,
+    renderer: (cardData) => {
+      const card = createCard(cardData);
+      cards.addItem(card);
+    },
+  },
+  '.elements__list',
+);
+cards.renderItems();
 
 function editFormSubmitHandler({ 'name-field': name, 'job-field': job }) {
   profileInfo.setUserInfo({ name, job });
@@ -69,10 +79,9 @@ function addCardFormSubmitHandler({
   'title-field': text,
   'img-link-field': imgLink,
 }) {
-  addCard({ text, imgLink });
+  cards.addItem(createCard({ text, imgLink }));
 }
 
-initialCards.forEach(addCard);
 forms.forEach((form) => {
   const newFormValidator = new FormValidator(settingsObject, form);
   newFormValidator.enableValidation();
@@ -93,5 +102,3 @@ addCardFormPopup.setEventListeners();
 editProfileFormPopup.setEventListeners();
 profileEditButton.addEventListener('click', () => editProfileFormPopup.open());
 profileAddButton.addEventListener('click', () => addCardFormPopup.open());
-editForm.addEventListener('submit', editFormSubmitHandler);
-addCardForm.addEventListener('submit', addCardFormSubmitHandler);
