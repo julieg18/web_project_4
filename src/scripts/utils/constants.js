@@ -1,30 +1,37 @@
+import lakeLouse from '../../images/lake-louise.jpg';
+import baldMountains from '../../images/bald-mountains.jpg';
+import latemar from '../../images/latemar.jpg';
+import vanoisNational from '../../images/vanois-national.jpg';
+import lagoDiBraies from '../../images/lago-di-braies.jpg';
+import yosemiteValley from '../../images/yosemite-valley.jpg';
+
 const profileAddButton = document.querySelector('.profile__button_type_add');
 const profileEditButton = document.querySelector('.profile__button_type_edit');
 const forms = Array.from(document.querySelectorAll('.form'));
 const initialCards = [
   {
     text: 'Lake Louise',
-    imgLink: './images/lake-louise.jpg',
+    imgLink: lakeLouse,
   },
   {
     text: 'Bald Mountains',
-    imgLink: './images/bald-mountains.jpg',
+    imgLink: baldMountains,
   },
   {
     text: 'Latemar',
-    imgLink: './images/latemar.jpg',
+    imgLink: latemar,
   },
   {
     text: 'Vanois National...',
-    imgLink: './images/vanois-national.jpg',
+    imgLink: vanoisNational,
   },
   {
     text: 'Lago di Braies',
-    imgLink: './images/lago-di-braies.jpg',
+    imgLink: lagoDiBraies,
   },
   {
     text: 'Yosemite Valley',
-    imgLink: './images/yosemite-valley.jpg',
+    imgLink: yosemiteValley,
   },
 ];
 const settingsObject = {
