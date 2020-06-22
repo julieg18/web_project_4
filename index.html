@@ -35,7 +35,7 @@
         <ul class="elements__list"></ul>
       </section>
 
-      <div class="popup">
+      <div class="popup popup_content_edit-profile-form">
         <div class="popup__container">
           <button class="button popup__exit-button"></button>
           <form class="form form_type_edit-profile" novalidate>
@@ -72,6 +72,12 @@
               Save
             </button>
           </form>
+        </div>
+      </div>
+
+      <div class="popup popup_content_add-card-form">
+        <div class="popup__container">
+          <button class="button popup__exit-button"></button>
           <form class="form form__type_add-card" novalidate>
             <h1 class="form__heading">New place</h1>
             <label for="title-field" class="form__label">
@@ -103,7 +109,12 @@
               Create
             </button>
           </form>
+        </div>
+      </div>
 
+      <div class="popup popup_content_picture">
+        <div class="popup__container">
+          <button class="button popup__exit-button"></button>
           <div class="picture">
             <img class="picture__image" />
             <p class="picture__title"></p>

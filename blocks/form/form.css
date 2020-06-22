@@ -8,7 +8,6 @@
 @import url(./__submit-button/_inactive/form__submit-button_inactive.css);
 
 .form {
-  display: none;
   flex-direction: column;
   padding: 30px;
   background-color: #fff;
