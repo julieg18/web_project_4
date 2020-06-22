@@ -1,21 +1,17 @@
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
-import { togglePopupBox } from '../utils/utils.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
 
 const profileEditButton = document.querySelector('.profile__button_type_edit');
 const profileAddButton = document.querySelector('.profile__button_type_add');
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
 const elementsList = document.querySelector('.elements__list');
-const popup = document.querySelector('.popup');
-const popupExitButton = popup.querySelector('.popup__exit-button');
-const editForm = popup.querySelector('.form_type_edit-profile');
-const jobInput = editForm.querySelector('.form__field_type_job');
-const nameInput = editForm.querySelector('.form__field_type_name');
-const addCardForm = popup.querySelector('.form__type_add-card');
-const titleInput = addCardForm.querySelector('.form__field_type_title');
-const imgLinkInput = addCardForm.querySelector('.form__field_type_img-link');
+const editForm = document.querySelector('.form_type_edit-profile');
+const addCardForm = document.querySelector('.form__type_add-card');
 const forms = Array.from(document.querySelectorAll('.form'));
+const imagePopup = new PopupWithImage('.popup_content_picture');
 const initialCards = [
   {
     text: 'Lake Louise',
@@ -50,44 +46,28 @@ const settingsObject = {
   errorClass: 'form__field-error_active',
 };
 
-function checkIfPopupOverlayWasClicked(e) {
-  if (e.target.classList.contains('popup')) {
-    togglePopupBox();
-  }
+function handleCardClick(data) {
+  imagePopup.open(data);
 }
 
 function addCard(cardData) {
-  const card = new Card(cardData, '#element-template');
+  const card = new Card(
+    { ...cardData, popup: imagePopup, handleCardClick },
+    '#element-template',
+  );
   elementsList.prepend(card.generateCard());
 }
 
-function showForm(evt) {
-  if (evt.target.classList.contains('profile__button_type_edit')) {
-    editForm.classList.add('form_show');
-  } else {
-    addCardForm.classList.add('form_show');
-  }
-
-  togglePopupBox();
+function editFormSubmitHandler({ 'name-field': name, 'job-field': job }) {
+  profileName.textContent = name;
+  profileJob.textContent = job;
 }
 
-function editFormSubmitHandler(evt) {
-  evt.preventDefault();
-
-  profileName.textContent = nameInput.value;
-  profileJob.textContent = jobInput.value;
-
-  editForm.reset();
-  togglePopupBox();
-}
-
-function addCardFormSubmitHandler(evt) {
-  evt.preventDefault();
-
-  addCard({ text: titleInput.value, imgLink: imgLinkInput.value });
-
-  addCardForm.reset();
-  togglePopupBox();
+function addCardFormSubmitHandler({
+  'title-field': text,
+  'img-link-field': imgLink,
+}) {
+  addCard({ text, imgLink });
 }
 
 initialCards.forEach(addCard);
@@ -95,9 +75,21 @@ forms.forEach((form) => {
   const newFormValidator = new FormValidator(settingsObject, form);
   newFormValidator.enableValidation();
 });
-profileEditButton.addEventListener('click', showForm);
-profileAddButton.addEventListener('click', showForm);
-popupExitButton.addEventListener('click', togglePopupBox);
-popup.addEventListener('click', checkIfPopupOverlayWasClicked);
+
+const addCardFormPopup = new PopupWithForm(
+  addCardFormSubmitHandler,
+  '.popup_content_add-card-form',
+);
+
+const editProfileFormPopup = new PopupWithForm(
+  editFormSubmitHandler,
+  '.popup_content_edit-profile-form',
+);
+
+imagePopup.setEventListeners();
+addCardFormPopup.setEventListeners();
+editProfileFormPopup.setEventListeners();
+profileEditButton.addEventListener('click', () => editProfileFormPopup.open());
+profileAddButton.addEventListener('click', () => addCardFormPopup.open());
 editForm.addEventListener('submit', editFormSubmitHandler);
 addCardForm.addEventListener('submit', addCardFormSubmitHandler);

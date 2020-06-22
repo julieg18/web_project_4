@@ -1,14 +1,9 @@
-import { togglePopupBox } from '../utils/utils.js';
-
-const picture = document.querySelector('.picture');
-const pictureImage = picture.querySelector('.picture__image');
-const pictureTitle = picture.querySelector('.picture__title');
-
 class Card {
-  constructor({ text, imgLink }, templateSelector) {
+  constructor({ text, imgLink, handleCardClick }, templateSelector) {
     this._text = text;
     this._imgLink = imgLink;
     this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -27,15 +22,6 @@ class Card {
     this._element = null;
   }
 
-  _showPicture() {
-    pictureImage.src = this._elementImage.src;
-    pictureImage.alt = this._elementImage.alt;
-    pictureTitle.textContent = this._elementImage.alt;
-
-    picture.classList.add('picture_show');
-    togglePopupBox();
-  }
-
   _setEventListeners() {
     this._element
       .querySelector('.element__like-button')
@@ -47,7 +33,12 @@ class Card {
 
     this._element
       .querySelector('.element__image')
-      .addEventListener('click', () => this._showPicture());
+      .addEventListener('click', () =>
+        this._handleCardClick({
+          text: this._elementImage.alt,
+          src: this._elementImage.src,
+        }),
+      );
   }
 
   generateCard() {
