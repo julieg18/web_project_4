@@ -1,4 +1,4 @@
-import Popup from './Popup.js';
+import Popup from './Popup';
 
 class PopupWithImage extends Popup {
   open({ text, src }) {

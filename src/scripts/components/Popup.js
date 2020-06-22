@@ -14,22 +14,22 @@ class Popup {
     }
   }
 
-  checkIfPopupOverlayWasClicked(e) {
-    if (e.target.classList.contains('popup')) {
+  checkIfPopupOverlayWasClicked(evt) {
+    if (evt.target.classList.contains('popup')) {
       this.close();
     }
   }
 
   open() {
     this._popup.classList.add('popup_opened');
-    document.addEventListener('keyup', (e) => this._handleEscClose(e.key));
+    document.addEventListener('keyup', (evt) => this._handleEscClose(evt.key));
   }
 
   setEventListeners() {
     const button = this._popup.querySelector('.popup__exit-button');
     button.addEventListener('click', () => this.close());
-    this._popup.addEventListener('click', (e) =>
-      this.checkIfPopupOverlayWasClicked(e),
+    this._popup.addEventListener('click', (evt) =>
+      this.checkIfPopupOverlayWasClicked(evt),
     );
   }
 }
