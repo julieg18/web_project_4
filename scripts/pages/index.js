@@ -2,16 +2,19 @@ import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
 
 const profileEditButton = document.querySelector('.profile__button_type_edit');
 const profileAddButton = document.querySelector('.profile__button_type_add');
-const profileName = document.querySelector('.profile__name');
-const profileJob = document.querySelector('.profile__job');
 const elementsList = document.querySelector('.elements__list');
 const editForm = document.querySelector('.form_type_edit-profile');
 const addCardForm = document.querySelector('.form__type_add-card');
 const forms = Array.from(document.querySelectorAll('.form'));
 const imagePopup = new PopupWithImage('.popup_content_picture');
+const profileInfo = new UserInfo({
+  nameSelector: '.profile__name',
+  jobSelector: '.profile__job',
+});
 const initialCards = [
   {
     text: 'Lake Louise',
@@ -59,8 +62,7 @@ function addCard(cardData) {
 }
 
 function editFormSubmitHandler({ 'name-field': name, 'job-field': job }) {
-  profileName.textContent = name;
-  profileJob.textContent = job;
+  profileInfo.setUserInfo({ name, job });
 }
 
 function addCardFormSubmitHandler({
