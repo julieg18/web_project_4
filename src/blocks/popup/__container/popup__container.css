@@ -2,6 +2,6 @@
   position: relative;
 }
 
-.popup__container {
+.popup__container:hover {
   cursor: initial;
 }
