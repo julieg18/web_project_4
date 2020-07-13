@@ -1,4 +1,5 @@
 import '../../pages/index.css';
+import Api from '../components/Api';
 import Card from '../components/Card';
 import FormValidator from '../components/FormValidator';
 import PopupWithImage from '../components/PopupWithImage';
@@ -9,13 +10,25 @@ import {
   profileAddButton,
   profileEditButton,
   forms,
-  initialCards,
   settingsObject,
-} from '../utils/constants.js';
+} from '../utils/constants';
 
 const profileInfo = new UserInfo({
   nameSelector: '.profile__name',
   jobSelector: '.profile__job',
+});
+
+const api = new Api({
+  baseUrl: 'https://around.nomoreparties.co/v1/group-1',
+  headers: {
+    authorization: 'b5addf89-e4e2-4334-ba86-da0986124fda',
+    'Content-Type': 'application/json',
+  },
+});
+
+api.getUser().then((user) => {
+  const { name, about } = user;
+  profileInfo.setUserInfo({ name, job: about });
 });
 
 const imagePopup = new PopupWithImage('.popup_content_picture');
@@ -33,17 +46,20 @@ function createCard(cardData) {
   return card.generateCard();
 }
 
-const cards = new Section(
-  {
-    items: initialCards,
-    renderer: (cardData) => {
-      const card = createCard(cardData);
-      cards.addItem(card);
+let cards;
+api.getInitialCards().then((initialCards) => {
+  cards = new Section(
+    {
+      items: initialCards,
+      renderer: (cardData) => {
+        const card = createCard(cardData);
+        cards.addItem(card);
+      },
     },
-  },
-  '.elements__list',
-);
-cards.renderItems();
+    '.elements__list',
+  );
+  cards.renderItems();
+});
 
 function addCardFormSubmitHandler({
   'title-field': text,
