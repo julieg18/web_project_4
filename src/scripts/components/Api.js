@@ -31,6 +31,18 @@ class Api {
         console.log(err);
       });
   }
+
+  editUserInfo({ name, about }) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({ name, about }),
+    })
+      .then(this._checkServerResponse)
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 }
 
 export default Api;

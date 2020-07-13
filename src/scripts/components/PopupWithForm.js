@@ -1,10 +1,12 @@
 import Popup from './Popup';
 
 class PopupWithForm extends Popup {
-  constructor(callback, selector) {
+  constructor({ callback, submitButtonText }, selector) {
     super(selector);
     this._callback = callback;
     this._form = this._popup.querySelector('.form');
+    this._submitButton = this._form.querySelector('.form__submit-button');
+    this._submitButtonText = submitButtonText;
   }
 
   _getInputValues(evt) {
@@ -16,8 +18,11 @@ class PopupWithForm extends Popup {
       values[input.id] = input.value;
     });
 
-    this._callback(values);
-    this.close();
+    this._submitButton.textContent = 'Loading...';
+    this._callback(values).then(() => {
+      this.close();
+      this._submitButton.textContent = this._submitButtonText;
+    });
   }
 
   close() {

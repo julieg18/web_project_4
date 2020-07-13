@@ -74,12 +74,16 @@ const addCardFormPopup = new PopupWithForm(
 );
 addCardFormPopup.setEventListeners();
 
-function editFormSubmitHandler({ 'name-field': name, 'job-field': job }) {
-  profileInfo.setUserInfo({ name, job });
+function editFormSubmitHandler({ 'name-field': name, 'job-field': about }) {
+  return api
+    .editUserInfo({ name, about })
+    .then(({ name: newName, about: newJob }) => {
+      profileInfo.setUserInfo({ name: newName, job: newJob });
+    });
 }
 
 const editProfileFormPopup = new PopupWithForm(
-  editFormSubmitHandler,
+  { callback: editFormSubmitHandler, submitButtonText: 'Save' },
   '.popup_content_edit-profile-form',
 );
 editProfileFormPopup.setEventListeners();
