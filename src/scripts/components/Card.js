@@ -1,7 +1,8 @@
 class Card {
-  constructor({ name, link, handleCardClick }, templateSelector) {
+  constructor({ name, link, handleCardClick, likes }, templateSelector) {
     this._text = name;
     this._imgLink = link;
+    this._likes = likes;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
   }
@@ -49,6 +50,9 @@ class Card {
     this._element.querySelector('.element__image').alt = this._text;
     this._element.querySelector('.element__image').src = this._imgLink;
     this._element.querySelector('.element__title').textContent = this._text;
+    this._element.querySelector(
+      '.element__likes-num',
+    ).textContent = this._likes.length;
 
     return this._element;
   }
