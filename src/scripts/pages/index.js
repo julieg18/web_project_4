@@ -65,11 +65,13 @@ function addCardFormSubmitHandler({
   'title-field': text,
   'img-link-field': imgLink,
 }) {
-  cards.addItem(createCard({ text, imgLink }));
+  return api.addCard({ name: text, link: imgLink }).then(({ name, link }) => {
+    cards.addItem(createCard({ name, link }));
+  });
 }
 
 const addCardFormPopup = new PopupWithForm(
-  addCardFormSubmitHandler,
+  { callback: addCardFormSubmitHandler, submitButtonText: 'Create' },
   '.popup_content_add-card-form',
 );
 addCardFormPopup.setEventListeners();

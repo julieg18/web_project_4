@@ -32,11 +32,23 @@ class Api {
       });
   }
 
-  editUserInfo({ name, about }) {
+  editUserInfo(newUserInfo) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
-      body: JSON.stringify({ name, about }),
+      body: JSON.stringify(newUserInfo),
+    })
+      .then(this._checkServerResponse)
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  addCard(newCardInfo) {
+    return fetch(`${this._baseUrl}/cards`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify(newCardInfo),
     })
       .then(this._checkServerResponse)
       .catch((err) => {
