@@ -44,6 +44,12 @@ const deleteCardFormPopup = new PopupWithForm(
 );
 deleteCardFormPopup.setEventListeners();
 
+function handleCardLikeButtonClick({ cardWasLiked, cardId }) {
+  return api.editCardLikes({ cardWasLiked, cardId }).then((cardData) => {
+    return cardData.likes;
+  });
+}
+
 const imagePopup = new PopupWithImage('.popup_content_picture');
 imagePopup.setEventListeners();
 
@@ -52,13 +58,18 @@ function handleCardClick(data) {
 }
 
 function createCard({ cardData, userId }) {
+  const hasUserLikedCard = cardData.likes
+    .map((personThatLiked) => personThatLiked._id)
+    .includes(userId);
   const card = new Card(
     {
       ...cardData,
       handleCardClick,
       handleDeleteCardBtnClick: () =>
         deleteCardFormPopup.open({ cardId: cardData._id }),
+      handleCardLikeButtonClick,
       belongsToUser: userId === cardData.owner._id,
+      hasUserLikedCard,
     },
     '#element-template',
   );

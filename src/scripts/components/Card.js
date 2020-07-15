@@ -6,19 +6,23 @@ class Card {
       link,
       handleCardClick,
       handleDeleteCardBtnClick,
+      handleCardLikeButtonClick,
       likes,
       belongsToUser,
+      hasUserLikedCard,
     },
     templateSelector,
   ) {
-    this.cardId = _id;
+    this._cardId = _id;
     this._text = name;
     this._imgLink = link;
     this._likes = likes;
     this._belongsToUser = belongsToUser;
+    this._hasUserLikedCard = hasUserLikedCard;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
     this._handleDeleteCardBtnClick = handleDeleteCardBtnClick;
+    this._handleCardLikeButtonClick = handleCardLikeButtonClick;
   }
 
   _getTemplate() {
@@ -32,10 +36,29 @@ class Card {
       .classList.toggle('element__like-button_active');
   }
 
+  _updateCardLikes(likes) {
+    this.likes = likes;
+    this._element.querySelector('.element__likes-num').textContent =
+      likes.length;
+    this._toggleLikeButton();
+  }
+
+  _handleCardLikeBtnClick(likeButton) {
+    this._handleCardLikeButtonClick({
+      cardWasLiked: !likeButton.classList.contains(
+        'element__like-button_active',
+      ),
+      cardId: this._cardId,
+    }).then((likes) => {
+      this._updateCardLikes(likes);
+    });
+  }
+
   _setEventListeners() {
-    this._element
-      .querySelector('.element__like-button')
-      .addEventListener('click', () => this._toggleLikeButton());
+    const likeButton = this._element.querySelector('.element__like-button');
+    likeButton.addEventListener('click', () =>
+      this._handleCardLikeBtnClick(likeButton),
+    );
 
     this._element
       .querySelector('.element__delete-button')
@@ -66,6 +89,13 @@ class Card {
         .querySelector('.element__delete-button')
         .classList.remove('element__delete-button_hidden');
     }
+
+    if (this._hasUserLikedCard) {
+      this._element
+        .querySelector('.element__like-button')
+        .classList.add('element__like-button_active');
+    }
+
     this._element.querySelector('.element__image').alt = this._text;
     this._element.querySelector('.element__image').src = this._imgLink;
     this._element.querySelector('.element__title').textContent = this._text;

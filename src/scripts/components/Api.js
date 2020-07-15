@@ -66,6 +66,17 @@ class Api {
         console.log(err);
       });
   }
+
+  editCardLikes({ cardWasLiked, cardId }) {
+    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+      method: cardWasLiked ? 'PUT' : 'DELETE',
+      headers: this._headers,
+    })
+      .then(this._checkServerResponse)
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 }
 
 export default Api;
