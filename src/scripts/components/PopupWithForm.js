@@ -18,7 +18,7 @@ class PopupWithForm extends Popup {
       values[input.id] = input.value;
     });
 
-    this._submitButton.textContent = 'Loading...';
+    this._submitButton.textContent = 'Saving...';
     this._callback(values).then(() => {
       this.close();
       this._submitButton.textContent = this._submitButtonText;
