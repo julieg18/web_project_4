@@ -1,10 +1,24 @@
 class Card {
-  constructor({ name, link, handleCardClick, likes }, templateSelector) {
+  constructor(
+    {
+      _id,
+      name,
+      link,
+      handleCardClick,
+      handleDeleteCardBtnClick,
+      likes,
+      belongsToUser,
+    },
+    templateSelector,
+  ) {
+    this.cardId = _id;
     this._text = name;
     this._imgLink = link;
     this._likes = likes;
+    this._belongsToUser = belongsToUser;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
+    this._handleDeleteCardBtnClick = handleDeleteCardBtnClick;
   }
 
   _getTemplate() {
@@ -18,11 +32,6 @@ class Card {
       .classList.toggle('element__like-button_active');
   }
 
-  _deleteCard() {
-    this._element.remove();
-    this._element = null;
-  }
-
   _setEventListeners() {
     this._element
       .querySelector('.element__like-button')
@@ -30,7 +39,7 @@ class Card {
 
     this._element
       .querySelector('.element__delete-button')
-      .addEventListener('click', () => this._deleteCard());
+      .addEventListener('click', () => this._handleDeleteCardBtnClick());
 
     this._element
       .querySelector('.element__image')
@@ -42,11 +51,21 @@ class Card {
       );
   }
 
+  deleteCard() {
+    this._element.remove();
+    this._element = null;
+  }
+
   generateCard() {
     this._element = this._getTemplate();
     this._elementImage = this._element.querySelector('.element__image');
     this._setEventListeners();
 
+    if (this._belongsToUser) {
+      this._element
+        .querySelector('.element__delete-button')
+        .classList.remove('element__delete-button_hidden');
+    }
     this._element.querySelector('.element__image').alt = this._text;
     this._element.querySelector('.element__image').src = this._imgLink;
     this._element.querySelector('.element__title').textContent = this._text;

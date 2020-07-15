@@ -55,6 +55,17 @@ class Api {
         console.log(err);
       });
   }
+
+  deleteCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+      method: 'DELETE',
+      headers: this._headers,
+    })
+      .then(this._checkServerResponse)
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 }
 
 export default Api;

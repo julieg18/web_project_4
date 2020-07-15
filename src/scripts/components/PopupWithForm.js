@@ -13,7 +13,7 @@ class PopupWithForm extends Popup {
     evt.preventDefault();
 
     const inputs = Array.from(this._popup.querySelectorAll('input'));
-    const values = {};
+    const values = { ...this._additionalCallBackParameters };
     inputs.forEach((input) => {
       values[input.id] = input.value;
     });
@@ -23,6 +23,11 @@ class PopupWithForm extends Popup {
       this.close();
       this._submitButton.textContent = this._submitButtonText;
     });
+  }
+
+  open(additionalCallBackParameters) {
+    this._additionalCallBackParameters = additionalCallBackParameters;
+    super.open();
   }
 
   close() {

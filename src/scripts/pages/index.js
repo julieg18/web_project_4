@@ -26,10 +26,23 @@ const api = new Api({
   },
 });
 
-api.getUser().then((user) => {
-  const { name, about } = user;
+api.getUser().then(({ name, about }) => {
   profileInfo.setUserInfo({ name, job: about });
 });
+
+const cardClasses = {};
+function deleteCardSubmitHandler({ cardId }) {
+  return api.deleteCard(cardId).then(() => {
+    cardClasses[cardId].deleteCard();
+    delete cardClasses[cardId];
+  });
+}
+
+const deleteCardFormPopup = new PopupWithForm(
+  { callback: deleteCardSubmitHandler, submitButtonText: 'Yes' },
+  '.popup_content_delete-card-form',
+);
+deleteCardFormPopup.setEventListeners();
 
 const imagePopup = new PopupWithImage('.popup_content_picture');
 imagePopup.setEventListeners();
@@ -38,21 +51,33 @@ function handleCardClick(data) {
   imagePopup.open(data);
 }
 
-function createCard(cardData) {
+function createCard({ cardData, userId }) {
   const card = new Card(
-    { ...cardData, popup: imagePopup, handleCardClick },
+    {
+      ...cardData,
+      handleCardClick,
+      handleDeleteCardBtnClick: () =>
+        deleteCardFormPopup.open({ cardId: cardData._id }),
+      belongsToUser: userId === cardData.owner._id,
+    },
     '#element-template',
   );
+  cardClasses[card.cardId] = card;
   return card.generateCard();
 }
 
 let cards;
-api.getInitialCards().then((initialCards) => {
+let userId;
+const getInitalCards = api.getInitialCards();
+const getUser = api.getUser();
+Promise.all([getInitalCards, getUser]).then((data) => {
+  const [initialCards, user] = data;
+  userId = user._id;
   cards = new Section(
     {
       items: initialCards,
       renderer: (cardData) => {
-        const card = createCard(cardData);
+        const card = createCard({ cardData, userId: user._id });
         cards.addItem(card);
       },
     },
@@ -65,8 +90,8 @@ function addCardFormSubmitHandler({
   'title-field': text,
   'img-link-field': imgLink,
 }) {
-  return api.addCard({ name: text, link: imgLink }).then(({ name, link }) => {
-    cards.addItem(createCard({ name, link }));
+  return api.addCard({ name: text, link: imgLink }).then((cardData) => {
+    cards.addItem(createCard({ cardData, userId }));
   });
 }
 
