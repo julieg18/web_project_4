@@ -2,10 +2,10 @@ import '../../pages/index.css';
 import Api from '../components/Api';
 import Card from '../components/Card';
 import FormValidator from '../components/FormValidator';
-import PopupWithImage from '../components/PopupWithImage';
-import PopupWithForm from '../components/PopupWithForm';
+import PicturePopup from '../components/PicturePopup';
+import PopupWithForms from '../components/PopupWithForms';
 import UserInfo from '../components/UserInfo';
-import Section from '../components/Section';
+import List from '../components/List';
 import {
   profileAddButton,
   profileEditButton,
@@ -41,7 +41,7 @@ function changeProfileAvatarSubmitHandler({
   });
 }
 
-const changeProfileAvatarFormPopup = new PopupWithForm(
+const changeProfileAvatarFormPopup = new PopupWithForms(
   { callback: changeProfileAvatarSubmitHandler, submitButtonText: 'Save' },
   '.popup_content_change-avatar-form',
 );
@@ -55,7 +55,7 @@ function deleteCardSubmitHandler({ cardId }) {
   });
 }
 
-const deleteCardFormPopup = new PopupWithForm(
+const deleteCardFormPopup = new PopupWithForms(
   { callback: deleteCardSubmitHandler, submitButtonText: 'Yes' },
   '.popup_content_delete-card-form',
 );
@@ -67,7 +67,7 @@ function handleCardLikeButtonClick({ cardWasLiked, cardId }) {
   });
 }
 
-const imagePopup = new PopupWithImage('.popup_content_picture');
+const imagePopup = new PicturePopup('.popup_content_picture');
 imagePopup.setEventListeners();
 
 function handleCardClick(data) {
@@ -101,7 +101,7 @@ const getUser = api.getUser();
 Promise.all([getInitalCards, getUser]).then((data) => {
   const [initialCards, user] = data;
   userId = user._id;
-  cards = new Section(
+  cards = new List(
     {
       items: initialCards,
       renderer: (cardData) => {
@@ -123,7 +123,7 @@ function addCardFormSubmitHandler({
   });
 }
 
-const addCardFormPopup = new PopupWithForm(
+const addCardFormPopup = new PopupWithForms(
   { callback: addCardFormSubmitHandler, submitButtonText: 'Create' },
   '.popup_content_add-card-form',
 );
@@ -137,7 +137,7 @@ function editFormSubmitHandler({ 'name-field': name, 'job-field': about }) {
     });
 }
 
-const editProfileFormPopup = new PopupWithForm(
+const editProfileFormPopup = new PopupWithForms(
   { callback: editFormSubmitHandler, submitButtonText: 'Save' },
   '.popup_content_edit-profile-form',
 );
