@@ -7,7 +7,7 @@
 - Images
 
 **Details**
-"Around The U.S." is an interactive page where users can add, remove, or like photos. It was created with HTML, CSS, and Javascript. The CSS is formatted according to the CSS BEM Nested File Structure and the entire project is bundled with webpack. [Here is the published project](https://julieg18.github.io/web_project_4/)
+"Around The U.S." is an interactive page where users can add, remove, or like photos. Users can also edit their own profile info. It was created with HTML, CSS, and Javascript. The CSS is formatted according to the CSS BEM Nested File Structure and the entire project is bundled with webpack. [Here is the published project](https://julieg18.github.io/web_project_4/)
 
 **Figma**
 
