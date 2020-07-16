@@ -9,6 +9,7 @@ import Section from '../components/Section';
 import {
   profileAddButton,
   profileEditButton,
+  profileChangeAvatarButton,
   forms,
   settingsObject,
 } from '../utils/constants';
@@ -16,6 +17,7 @@ import {
 const profileInfo = new UserInfo({
   nameSelector: '.profile__name',
   jobSelector: '.profile__job',
+  avatarSelector: '.profile__avatar-img',
 });
 
 const api = new Api({
@@ -26,9 +28,24 @@ const api = new Api({
   },
 });
 
-api.getUser().then(({ name, about }) => {
+api.getUser().then(({ name, about, avatar }) => {
   profileInfo.setUserInfo({ name, job: about });
+  profileInfo.setAvatar(avatar);
 });
+
+function changeProfileAvatarSubmitHandler({
+  'avatar-img-field': avatarImgLink,
+}) {
+  return api.editUserAvatar(avatarImgLink).then(() => {
+    profileInfo.setAvatar(avatarImgLink);
+  });
+}
+
+const changeProfileAvatarFormPopup = new PopupWithForm(
+  { callback: changeProfileAvatarSubmitHandler, submitButtonText: 'Save' },
+  '.popup_content_change-avatar-form',
+);
+changeProfileAvatarFormPopup.setEventListeners();
 
 const cardClasses = {};
 function deleteCardSubmitHandler({ cardId }) {
@@ -130,5 +147,8 @@ forms.forEach((form) => {
   const newFormValidator = new FormValidator(settingsObject, form);
   newFormValidator.enableValidation();
 });
+profileChangeAvatarButton.addEventListener('click', () =>
+  changeProfileAvatarFormPopup.open(),
+);
 profileEditButton.addEventListener('click', () => editProfileFormPopup.open());
 profileAddButton.addEventListener('click', () => addCardFormPopup.open());

@@ -44,6 +44,18 @@ class Api {
       });
   }
 
+  editUserAvatar(avatar) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({ avatar }),
+    })
+      .then(this._checkServerResponse)
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   addCard(newCardInfo) {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',

@@ -1,5 +1,8 @@
 const profileAddButton = document.querySelector('.profile__button_type_add');
 const profileEditButton = document.querySelector('.profile__button_type_edit');
+const profileChangeAvatarButton = document.querySelector(
+  '.profile__change-avatar-button',
+);
 const forms = Array.from(document.querySelectorAll('.form'));
 const settingsObject = {
   inputSelector: '.form__field',
@@ -9,4 +12,10 @@ const settingsObject = {
   errorClass: 'form__field-error_active',
 };
 
-export { profileAddButton, profileEditButton, forms, settingsObject };
+export {
+  profileAddButton,
+  profileEditButton,
+  profileChangeAvatarButton,
+  forms,
+  settingsObject,
+};

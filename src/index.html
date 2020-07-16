@@ -11,11 +11,14 @@
     </header>
     <main>
       <section class="profile">
-        <img
-          src="./images/avatar-image.jpg"
-          alt="Jacques Cousteau"
-          class="profile__avatar"
-        />
+        <div class="profile__avatar">
+          <img
+            src="./images/avatar-image.jpg"
+            alt="avatar image"
+            class="profile__avatar-img"
+          />
+          <button class="profile__change-avatar-button"></button>
+        </div>
         <div class="profile__info">
           <p class="profile__name"></p>
           <button
@@ -104,6 +107,34 @@
               class="form__submit-button form__submit-button_type_add-card"
             >
               Create
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="popup popup_content_change-avatar-form">
+        <div class="popup__container">
+          <button class="button popup__exit-button"></button>
+          <form class="form form_type_change-avatar">
+            <h1 class="form__heading">Change profile picture</h1>
+            <label for="avatar-img-field" class="form__label">
+              <input
+                placeholder="Image-link"
+                type="url"
+                class="form__field form__field_type_avatar-img"
+                id="avatar-img-field"
+                required
+              />
+              <span
+                class="form__field-error"
+                id="avatar-img-field-error"
+              ></span>
+            </label>
+            <button
+              type="submit"
+              class="form__submit-button form__submit-button_inactive form__submit-button_type_change-avatar"
+            >
+              Save
             </button>
           </form>
         </div>
