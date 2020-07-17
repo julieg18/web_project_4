@@ -90,7 +90,7 @@ function createCard({ cardData, userId }) {
     },
     '#element-template',
   );
-  cardClasses[card.cardId] = card;
+  cardClasses[cardData._id] = card;
   return card.generateCard();
 }
 

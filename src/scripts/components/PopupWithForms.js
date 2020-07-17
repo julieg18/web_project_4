@@ -19,14 +19,20 @@ class PopupWithForms extends Popup {
     });
 
     this._submitButton.textContent = 'Saving...';
-    this._callback(values).then(() => {
-      this.close();
-      this._submitButton.textContent = this._submitButtonText;
-    });
+    this._callback(values)
+      .then(() => {
+        this.close();
+        this._submitButton.textContent = this._submitButtonText;
+      })
+      .catch((err) => {
+        console.log(err);
+        this.close();
+        this._submitButton.textContent = this._submitButtonText;
+      });
   }
 
   open(additionalCallBackParameters) {
-    this._additionalCallBackParameters = additionalCallBackParameters;
+    this._additionalCallBackParameters = additionalCallBackParameters || {};
     super.open();
   }
 
