@@ -6,6 +6,7 @@ module.exports = {
   entry: { main: './src/scripts/pages/index.js' },
   output: {
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '/web_project_4/',
   },
   module: {
     rules: [
