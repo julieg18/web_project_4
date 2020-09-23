@@ -8,6 +8,9 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/web_project_4/',
   },
+  devServer: {
+    openPage: 'web_project_4/',
+  },
   module: {
     rules: [
       {
