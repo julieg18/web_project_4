@@ -1,15 +1,17 @@
+/* eslint-disable no-console */
 class Api {
   constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
     this._headers = headers;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   _checkServerResponse(res) {
     if (res.ok) {
       return res.json();
     }
 
-    return Promise.reject(`Err: ${res.status}`);
+    return Promise.reject(new Error(`Err: ${res.status}`));
   }
 
   getUser() {
@@ -57,6 +59,7 @@ class Api {
   }
 
   addCard(newCardInfo) {
+    console.log(newCardInfo);
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
       headers: this._headers,
